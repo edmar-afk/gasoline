@@ -1,20 +1,22 @@
-import { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { useState, useEffect } from "react";import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
-const defaultCenter = [51.505, -0.09]; // Default to London if location access is denied
+const defaultCenter = [7.0515, 126.0885]; // Default to Mati, San Miguel ZDS
 
 const Map = () => {
 	const [userLocation, setUserLocation] = useState(defaultCenter);
 	const [isLoaded, setIsLoaded] = useState(false);
+	const [useUserLocation, setUseUserLocation] = useState(true);
+	const [statusMessage, setStatusMessage] = useState("");
 
 	useEffect(() => {
-		if (navigator.geolocation) {
+		if (useUserLocation && navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(
 				(position) => {
 					setUserLocation([position.coords.latitude, position.coords.longitude]);
 					setIsLoaded(true);
+					setStatusMessage(""); // Clear status message when location is on
 				},
 				(error) => {
 					console.error("Error getting user location:", error);
@@ -22,9 +24,12 @@ const Map = () => {
 				}
 			);
 		} else {
-			setIsLoaded(true); // If geolocation is not available, proceed to load the map with default center
+			setIsLoaded(true); // If location is off, load map with default center
+			if (!useUserLocation) {
+				setStatusMessage("You turned off your location");
+			}
 		}
-	}, []);
+	}, [useUserLocation]);
 
 	const customMarkerIcon = new L.Icon({
 		iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
@@ -35,9 +40,22 @@ const Map = () => {
 		shadowSize: [41, 41],
 	});
 
+	const handleToggleLocation = () => {
+		setUseUserLocation((prev) => !prev);
+	};
+
 	return (
 		<div>
-			{isLoaded && (
+			<label>
+				<input
+					type="checkbox"
+					checked={useUserLocation}
+					onChange={handleToggleLocation}
+				/>
+				Use my location
+			</label>
+			{statusMessage && <p>{statusMessage}</p>}
+			{useUserLocation && isLoaded && (
 				<MapContainer
 					center={userLocation}
 					zoom={13}
@@ -49,7 +67,7 @@ const Map = () => {
 					<Marker
 						position={userLocation}
 						icon={customMarkerIcon}>
-						<Popup>You are here</Popup>
+						<Popup>{useUserLocation ? "You are here" : "Default location"}</Popup>
 					</Marker>
 				</MapContainer>
 			)}
