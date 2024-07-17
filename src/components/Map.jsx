@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function Map() {
-	const [placeName, setPlaceName] = useState("");
+	const [townName, setTownName] = useState("");
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(true);
 
@@ -17,13 +17,15 @@ function Map() {
 							`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&addressdetails=1`
 						);
 
-						if (response.data && response.data.display_name) {
-							setPlaceName(response.data.display_name);
+						if (response.data && response.data.address) {
+							const address = response.data.address;
+							const town = address.town || address.village || address.city || address.locality;
+							setTownName(town || "No town found");
 						} else {
-							setPlaceName("No address found");
+							setTownName("No town found");
 						}
 					} catch (err) {
-						setError("Error fetching place name: " + err.message);
+						setError("Error fetching town name: " + err.message);
 					} finally {
 						setLoading(false);
 					}
@@ -46,7 +48,7 @@ function Map() {
 			) : (
 				<>
 					{error && <p>Error: {error}</p>}
-					<p>Place: {placeName}</p>
+					<p>Town: {townName}</p>
 				</>
 			)}
 		</>
