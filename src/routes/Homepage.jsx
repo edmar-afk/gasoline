@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 function Homepage() {
 	return (
 		<>
-			<div className="bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 h-screen">
+			<div className="bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 h-full">
 				<div className="flex justify-center pt-12">
 					<motion.img
 						initial={{ scale: 0 }}
@@ -40,7 +40,7 @@ function Homepage() {
 							animate={{ opacity: 1, y: 20 }}
 							transition={{ duration: 1 }}>
 							<Link
-								to={"/"}
+								to={"/dashboard"}
 								className="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full"
 								role="alert">
 								<span className="text-xs bg-purple-800 rounded-full px-4 py-1.5 mr-3">Go</span>{" "}
