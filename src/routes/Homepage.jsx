@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 function Homepage() {
 	return (
 		<>
-			<div className="bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 h-full">
+			<div className="bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 h-screen">
 				<div className="flex justify-center pt-12">
 					<motion.img
 						initial={{ scale: 0 }}

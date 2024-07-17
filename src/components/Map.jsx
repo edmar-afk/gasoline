@@ -21,7 +21,13 @@ const Map = () => {
 				(error) => {
 					console.error("Error getting user location:", error);
 					setIsLoaded(true); // Proceed to load the map with default center
-				}
+					if (error.code === error.PERMISSION_DENIED) {
+						setStatusMessage("Please enable GPS to use location features.");
+					} else {
+						setStatusMessage("Unable to retrieve location.");
+					}
+				},
+				{ enableHighAccuracy: true, timeout: 10000, maximumAge: 0 } // Options for better accuracy
 			);
 		} else {
 			setIsLoaded(true); // If location is off, load map with default center
