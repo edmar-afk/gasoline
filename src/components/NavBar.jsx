@@ -1,11 +1,33 @@
-import * as React from "react";import PropTypes from "prop-types";import CssBaseline from "@mui/material/CssBaseline";
+import * as React from "react";
+import PropTypes from "prop-types";
+import { Global } from "@emotion/react";
+import { styled } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { grey } from "@mui/material/colors";
 import Typography from "@mui/material/Typography";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import MenuIcon from "@mui/icons-material/Menu";
 import { motion } from "framer-motion";
-import { Global } from "@emotion/react";
 
 const drawerBleeding = 56;
+
+const Root = styled("div")(({ theme }) => ({
+	height: "100%",
+	backgroundColor: theme.palette.mode === "light" ? grey[200] : grey[800],
+}));
+
+const StyledBox = styled("div")(({ theme }) => ({
+	backgroundColor: theme.palette.mode === "light" ? "#fff" : grey[800],
+}));
+
+const Puller = styled("div")(({ theme }) => ({
+	width: 30,
+	height: 6,
+	backgroundColor: theme.palette.mode === "light" ? grey[300] : grey[900],
+	borderRadius: 3,
+	position: "absolute",
+	top: 8,
+	left: "calc(50% - 15px)",
+}));
 
 function NarBar(props) {
 	const { window } = props;
@@ -19,12 +41,12 @@ function NarBar(props) {
 	const container = window !== undefined ? () => window().document.body : undefined;
 
 	return (
-		<div className="h-full bg-gray-100 dark:bg-gray-900">
+		<Root>
 			<CssBaseline />
 			<Global
 				styles={{
 					".MuiDrawer-root > .MuiPaper-root": {
-						height: `calc(20% - ${drawerBleeding}px)`,
+						height: `calc(50% - ${drawerBleeding}px)`,
 						overflow: "visible",
 					},
 				}}
@@ -42,34 +64,45 @@ function NarBar(props) {
 				ModalProps={{
 					keepMounted: true,
 				}}>
-				<div
-					className="absolute top-[-56px] bg-bg-gray-800 dark:bg-white w-full rounded-t-2xl"
-					style={{
+				<StyledBox
+					sx={{
+						position: "absolute",
+						top: -drawerBleeding,
+						borderTopLeftRadius: 8,
+						borderTopRightRadius: 8,
 						visibility: "visible",
 						right: 0,
 						left: 0,
 					}}>
-					<div className="w-7.5 h-1.5 bg-gray-300 dark:bg-gray-900 rounded absolute left-1/2 transform -translate-x-1/2" />
-					<Typography className="p-2 text-center text-gray-500">
-						<MenuIcon /> Menu
+					<Puller />
+					<Typography
+						sx={{ p: 2, color: "text.secondary" }}
+						className="text-center">
+						<b className="text-blue-400 font-bold animate-bounce">0</b> Active promos inside Lapuyan area
 					</Typography>
-				</div>
-				<div className="px-2 pb-2 h-full overflow-auto">
-					{open && (
-						<motion.p
-							initial={{ scale: 0 }}
-							animate={{ scale: 1 }}
-							transition={{
-								type: "spring",
-								stiffness: 260,
-								damping: 20,
-							}}>
-							Hello
-						</motion.p>
-					)}
-				</div>
+				</StyledBox>
+				<StyledBox
+					sx={{
+						height: "100%",
+						overflow: "auto",
+					}}>
+					<div className="bg-white text-gray-800 dark:text-white dark:bg-gray-800 duration-300 p-3 h-screen">
+						{open && (
+							<motion.p
+								initial={{ scale: 0 }}
+								animate={{ scale: 1 }}
+								transition={{
+									type: "spring",
+									stiffness: 260,
+									damping: 20,
+								}}>
+								Hello
+							</motion.p>
+						)}
+					</div>
+				</StyledBox>
 			</SwipeableDrawer>
-		</div>
+		</Root>
 	);
 }
 
