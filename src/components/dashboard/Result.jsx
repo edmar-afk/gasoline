@@ -1,7 +1,8 @@
-import TrendingUpIcon from "@mui/icons-material/TrendingUp";import TrendingDownSharpIcon from "@mui/icons-material/TrendingDownSharp";
+import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import TrendingDownSharpIcon from "@mui/icons-material/TrendingDownSharp";
 import { motion } from "framer-motion";
+import RemoveRedEyeSharpIcon from "@mui/icons-material/RemoveRedEyeSharp";
 function Result() {
-    
 	return (
 		<>
 			<div className="w-full max-w-md p-4 sm:p-8">
@@ -20,11 +21,13 @@ function Result() {
 									<TrendingUpIcon className="text-red-800" />
 								</div>
 								<div className="flex-1 min-w-0 ms-4">
-									<p className="text-sm font-medium text-gray-900 truncate dark:text-white">Neil Sims</p>
-									<p className="text-sm text-gray-500 truncate dark:text-gray-400">email@windster.com</p>
+									<p className="text-sm font-medium text-gray-900 truncate dark:text-white">Shell Gasoline Station</p>
+									<p className="text-sm text-gray-500 truncate dark:text-gray-400 text-ellipsis">
+										Ubos atbang Bulangan sa Guipos
+									</p>
 								</div>
 								<div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-									$320
+									<RemoveRedEyeSharpIcon />
 								</div>
 							</div>
 						</motion.li>
@@ -38,11 +41,11 @@ function Result() {
 									<TrendingDownSharpIcon className="text-green-800" />
 								</div>
 								<div className="flex-1 min-w-0 ms-4">
-									<p className="text-sm font-medium text-gray-900 truncate dark:text-white">Bonnie Green</p>
-									<p className="text-sm text-gray-500 truncate dark:text-gray-400">email@windster.com</p>
+									<p className="text-sm font-medium text-gray-900 truncate dark:text-white">Neri Store</p>
+									<p className="text-sm text-gray-500 truncate dark:text-gray-400">Crossing Elementary</p>
 								</div>
 								<div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-									$3467
+									<RemoveRedEyeSharpIcon />
 								</div>
 							</div>
 						</motion.li>

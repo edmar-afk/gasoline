@@ -78,7 +78,7 @@ function NarBar(props) {
 					<Typography
 						sx={{ p: 2, color: "text.secondary" }}
 						className="text-center">
-						<b className="text-blue-400 font-bold animate-bounce">0</b> Active promos around Lapuyan area
+						<b className="text-blue-400 font-bold animate-bounce">0</b> Active promos around Guipos area
 					</Typography>
 				</StyledBox>
 				<StyledBox

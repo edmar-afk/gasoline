@@ -1,5 +1,4 @@
-import Map from "../components/Map";
-import DarkModeToggle from "../components/DarkModeToggle";
+import Map from "../components/Map";import DarkModeToggle from "../components/DarkModeToggle";
 import Result from "../components/dashboard/Result";
 
 function Dashboard() {
@@ -9,7 +8,9 @@ function Dashboard() {
 				<main className="">
 					<DarkModeToggle />
 					<Map />
-					<h5 className="text-2xl font-bold leading-none text-gray-900 dark:text-white mt-12 ml-2">Lapuyan <br /> Gasoline Station Results</h5>
+					<h5 className="text-2xl font-bold leading-none text-gray-900 dark:text-white mt-12 ml-2">
+						Guipos <br /> Gasoline Station
+					</h5>
 
 					<div className="p-2 mb-24">
 						<Result />
