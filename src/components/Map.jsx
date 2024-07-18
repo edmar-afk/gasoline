@@ -1,4 +1,8 @@
-import { useState } from "react";import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";import "leaflet/dist/leaflet.css";import L from "leaflet";const defaultCenter = [7.7114933, 123.2930602]; // Default to JHCSC Main Campus Gymnasium
+import { useState } from "react";
+import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+const defaultCenter = [7.7114933, 123.2930602]; // Default to JHCSC Main Campus Gymnasium
 // eslint-disable-next-line react/prop-types
 const UpdateMapView = ({ center }) => {
 	const map = useMap();
@@ -73,7 +77,7 @@ const Map = () => {
 				{statusMessage && <p className="absolute top-0 left-0 mt-8 bg-white p-2">{statusMessage}</p>}
 				<MapContainer
 					center={userLocation}
-					zoom={13}
+					zoom={12}
 					style={{ height: "100%", width: "100%" }}
 					scrollWheelZoom={false}
 					doubleClickZoom={false}

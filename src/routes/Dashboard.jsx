@@ -1,13 +1,19 @@
 import Map from "../components/Map";
-import DarkModeToggle from '../components/DarkModeToggle'
+import DarkModeToggle from "../components/DarkModeToggle";
+import Result from "../components/dashboard/Result";
+
 function Dashboard() {
 	return (
 		<>
-			<div className="min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white duration-300">
+			<div className="min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white duration-300 h-full">
 				<main className="">
-					<DarkModeToggle/>
+					<DarkModeToggle />
 					<Map />
-					<h1 className="text-2xl  top-5 left-6">Dashboard</h1>
+					<h5 className="text-2xl font-bold leading-none text-gray-900 dark:text-white mt-12 ml-2">Lapuyan <br /> Gasoline Station Results</h5>
+
+					<div className="p-2 mb-24">
+						<Result />
+					</div>
 				</main>
 			</div>
 		</>
