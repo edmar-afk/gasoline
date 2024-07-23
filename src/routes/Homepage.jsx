@@ -1,9 +1,17 @@
-/* eslint-disable react/no-unescaped-entities */import { Link } from "react-router-dom";import logo from "../assets/img/logo.png";
+/* eslint-disable react/no-unescaped-entities */ import { Link } from "react-router-dom";
+import logo from "../assets/img/logo.png";
 import { motion } from "framer-motion";
+import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 function Homepage() {
 	return (
 		<>
 			<div className="bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 h-screen">
+				<div className="flex flex-col items-center float-start p-2 fixed">
+					<Link to={"/login"}>
+						<Person2OutlinedIcon className="text-blue-500" />
+						<p className="text-blue-400 text-xs -mt-1">Login</p>
+					</Link>
+				</div>
 				<div className="flex justify-center pt-12">
 					<motion.img
 						initial={{ scale: 0 }}
