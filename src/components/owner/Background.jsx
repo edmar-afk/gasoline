@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import api from "../../assets/api";
+import { useEffect, useState } from "react";import api from "../../assets/api";
 import logo from "../../assets/img/logo.png";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import DarkModeToggle from "../DarkModeToggle";
@@ -45,7 +44,7 @@ function Background() {
 	}
 
 	// Base URL of your Django server
-	const baseURL = "http://127.0.0.1:8000";
+	const baseURL = "https://gasstationapi.pythonanywhere.com";
 	// https://gasstationapi.pythonanywhere.com
 	// http://127.0.0.1:8000
 
