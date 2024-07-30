@@ -29,7 +29,7 @@ function Background() {
 
 		fetchProfile();
 	}, [userId]);
-	console.log(profile);
+	// console.log(profile);
 	if (loading) {
 		return <div>Loading...</div>;
 	}
