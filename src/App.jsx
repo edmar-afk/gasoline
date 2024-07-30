@@ -7,7 +7,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./routes/Dashboard";
 import { DarkModeProvider } from "./context/DarkModeContext";
 import NavBar from "./components/NavBar";
-import Login from './routes/Login';
+import Login from "./routes/Login";
+import Register from "./routes/Register";
+import OwnerDashboard from "./routes/OwnerDashboard";
 
 function Logout() {
 	localStorage.clear();
@@ -28,7 +30,7 @@ function App() {
 						<Routes>
 							<Route
 								path="/home"
-								element={<ProtectedRoute></ProtectedRoute>}
+								element={<OwnerDashboard />}
 							/>
 							<Route
 								path="/"
@@ -37,6 +39,10 @@ function App() {
 							<Route
 								path="/login"
 								element={<Login />}
+							/>
+							<Route
+								path="/register"
+								element={<Register />}
 							/>
 							<Route
 								path="/dashboard"

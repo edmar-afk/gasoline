@@ -8,7 +8,7 @@ function Dashboard() {
 				<main className="">
 					<DarkModeToggle />
 					<Map />
-					<h5 className="text-2xl font-bold leading-none text-gray-900 dark:text-white mt-12 ml-2">
+					<h5 className="text-2xl font-bold leading-none text-gray-900 dark:text-white mt-12 ml-8">
 						Guipos <br /> Gasoline Station
 					</h5>
 
