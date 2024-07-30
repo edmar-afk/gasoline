@@ -1,4 +1,5 @@
-import DiscountIcon from "@mui/icons-material/Discount";function Pricing() {
+import DiscountIcon from "@mui/icons-material/Discount";
+function Pricing() {
 	return (
 		<>
 			<div className="flex flex-row items-center p-6">

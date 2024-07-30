@@ -3,6 +3,7 @@ import api from "../../assets/api";
 import logo from "../../assets/img/logo.png";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import DarkModeToggle from "../DarkModeToggle";
+
 function Background() {
 	const userData = JSON.parse(localStorage.getItem("userData"));
 	const userId = userData?.id; // Adjust according to your user data structure
@@ -42,14 +43,14 @@ function Background() {
 	const baseURL = "https://gasstationapi.pythonanywhere.com";
 
 	return (
-        <>
-            <DarkModeToggle/>
-			<div className="bg-red-400 dark:bg-red-900 h-[224px] overflow-hidden relative">
+		<>
+			<DarkModeToggle />
+			<div className="bg-red-400 dark:bg-red-900 relative">
 				<img
 					src={`${baseURL}/${profile.business_permit}`}
-					alt="Logo"
+					alt="Logo" className="h-[240px]"
 				/>
-				<div className="fixed top-[110px] left-4 text-white font-bold text-2xl w-[230px]">
+				<div className="absolute top-[270px] left-4 dark:text-white font-bold text-xl w-[230px] z-50">
 					<p>{userData.first_name}</p>
 					<p className="text-sm">{userData.email}</p>
 				</div>
