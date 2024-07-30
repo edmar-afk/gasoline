@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";import api from "../../assets/api";
+import { useEffect, useState } from "react";
+import api from "../../assets/api";
 import logo from "../../assets/img/logo.png";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import DarkModeToggle from "../DarkModeToggle";
 function Background() {
 	const userData = JSON.parse(localStorage.getItem("userData"));
 	const userId = userData?.id; // Adjust according to your user data structure
@@ -40,8 +42,9 @@ function Background() {
 	const baseURL = "https://gasstationapi.pythonanywhere.com";
 
 	return (
-		<>
-			<div className="bg-red-400 h-[224px] overflow-hidden relative">
+        <>
+            <DarkModeToggle/>
+			<div className="bg-red-400 dark:bg-red-900 h-[224px] overflow-hidden relative">
 				<img
 					src={`${baseURL}/${profile.business_permit}`}
 					alt="Logo"
@@ -58,7 +61,7 @@ function Background() {
 					alt="Logo"
 				/>
 				<p className="mt-2 w-fit p-2 rounded-full text-xs  bg-blue-200 text-blue-900 shadow-xl">
-					<ModeEditOutlineOutlinedIcon fontSize="small"/>
+					<ModeEditOutlineOutlinedIcon fontSize="small" />
 				</p>
 			</div>
 		</>
