@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";import api from "../../assets/api";import logo from "../../assets/img/logo.png";
-
+import { useEffect, useState } from "react";import api from "../../assets/api";
+import logo from "../../assets/img/logo.png";
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 function Background() {
 	const userData = JSON.parse(localStorage.getItem("userData"));
 	const userId = userData?.id; // Adjust according to your user data structure
@@ -50,11 +51,16 @@ function Background() {
 					<p className="text-sm">{userData.email}</p>
 				</div>
 			</div>
-			<img
-				src={logo}
-				className="w-[130px] z-50 absolute top-[150px] right-2 bg-white rounded-full border-4 border-blue-800"
-				alt="Logo"
-			/>
+			<div className="flex flex-col items-center z-50 absolute top-[150px] right-2">
+				<img
+					src={logo}
+					className="w-[130px] bg-white rounded-full border-4 border-blue-800 shadow-xl"
+					alt="Logo"
+				/>
+				<p className="mt-2 w-fit p-2 rounded-full text-xs  bg-blue-200 text-blue-900 shadow-xl">
+					<ModeEditOutlineOutlinedIcon fontSize="small"/>
+				</p>
+			</div>
 		</>
 	);
 }
