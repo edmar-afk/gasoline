@@ -60,7 +60,7 @@ function Background() {
 					className="w-[130px] bg-white rounded-full border-4 border-blue-800 shadow-xl"
 					alt="Logo"
 				/>
-				<p className="mt-2 w-fit p-2 rounded-full text-xs  bg-blue-200 text-blue-900 shadow-xl">
+				<p className="mt-2 w-fit p-2 rounded-full text-xs  bg-blue-200 dark:bg-blue-900 text-blue-900 dark:text-blue-200 shadow-xl">
 					<ModeEditOutlineOutlinedIcon fontSize="small" />
 				</p>
 			</div>
