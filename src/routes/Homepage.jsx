@@ -2,6 +2,7 @@
 import logo from "../assets/img/logo.png";
 import { motion } from "framer-motion";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
+
 function Homepage() {
 	return (
 		<>

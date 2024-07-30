@@ -3,6 +3,7 @@ import api from "../../assets/api";
 import logo from "../../assets/img/logo.png";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import DarkModeToggle from "../DarkModeToggle";
+import Modal from "@mui/material/Modal";
 
 function Background() {
 	const userData = JSON.parse(localStorage.getItem("userData"));
@@ -10,6 +11,10 @@ function Background() {
 	const [profile, setProfile] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
+
+	const [open, setOpen] = useState(false);
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
 
 	useEffect(() => {
 		const fetchProfile = async () => {
@@ -40,7 +45,9 @@ function Background() {
 	}
 
 	// Base URL of your Django server
-	const baseURL = "https://gasstationapi.pythonanywhere.com";
+	const baseURL = "http://127.0.0.1:8000";
+	// https://gasstationapi.pythonanywhere.com
+	// http://127.0.0.1:8000
 
 	return (
 		<>
@@ -48,7 +55,8 @@ function Background() {
 			<div className="bg-red-400 dark:bg-red-900 relative">
 				<img
 					src={`${baseURL}/${profile.business_permit}`}
-					alt="Logo" className="h-[240px]"
+					alt="Logo"
+					className="h-[240px]"
 				/>
 				<div className="absolute top-[270px] left-4 dark:text-white font-bold text-xl w-[230px] z-50">
 					<p>{userData.first_name}</p>
@@ -61,10 +69,27 @@ function Background() {
 					className="w-[130px] bg-white rounded-full border-4 border-blue-800 shadow-xl"
 					alt="Logo"
 				/>
-				<p className="mt-2 w-fit p-2 rounded-full text-xs  bg-blue-200 dark:bg-blue-900 text-blue-900 dark:text-blue-200 shadow-xl">
+				<p
+					onClick={handleOpen}
+					className="mt-2 w-fit p-2 rounded-full text-xs  bg-blue-200 dark:bg-blue-900 text-blue-900 dark:text-blue-200 shadow-xl">
 					<ModeEditOutlineOutlinedIcon fontSize="small" />
 				</p>
 			</div>
+
+			<Modal
+				open={open}
+				onClose={handleClose}
+				aria-labelledby="modal-modal-title"
+				aria-describedby="modal-modal-description">
+				<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[95%] bg-white dark:bg-gray-900 shadow-xl p-4">
+					<p className="text-gray-800 dark:text-white text-xl">
+						Edit your Profile <ModeEditOutlineOutlinedIcon fontSize="small" />
+					</p>
+					<p className="text-gray-800 dark:text-white">
+						Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+					</p>
+				</div>
+			</Modal>
 		</>
 	);
 }
