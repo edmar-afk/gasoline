@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";import api from "../../assets/api";import logo from "../../assets/img/logo.png";import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";import DarkModeToggle from "../DarkModeToggle";
+import { useEffect, useState } from "react";import api from "../../assets/api";
+import logo from "../../assets/img/logo.png";
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import DarkModeToggle from "../DarkModeToggle";
 import Modal from "@mui/material/Modal";
-
+import Zoom from "react-medium-image-zoom";
 function Background() {
 	const userData = JSON.parse(localStorage.getItem("userData"));
 	const userId = userData?.id; // Adjust according to your user data structure
@@ -41,17 +44,19 @@ function Background() {
 	}
 
 	// Base URL of your Django server
-	
+
 	return (
 		<>
 			<DarkModeToggle />
 			<div className="bg-red-400 dark:bg-red-900 relative">
 				<div className="h-[240px] overflow-hidden">
-					<img
-						src={`${import.meta.env.VITE_API_URL}/${profile.business_permit}`}
-						alt="Logo"
-						className=""
-					/>
+					<Zoom>
+						<img
+							src={`${import.meta.env.VITE_API_URL}/${profile.business_permit}`}
+							alt="Logo"
+							style={{ cursor: "zoom-in" }}
+						/>
+					</Zoom>
 				</div>
 				<div className="absolute top-[270px] left-4 dark:text-white font-bold text-sm w-[230px] z-50">
 					<p>{userData.first_name}</p>
