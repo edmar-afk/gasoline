@@ -41,6 +41,9 @@ export default function Login() {
 				localStorage.setItem("ACCESS_TOKEN", res.data.access);
 				localStorage.setItem("REFRESH_TOKEN", res.data.refresh);
 
+				// Verify that the token is stored
+				console.log(`Stored Access Token: ${res.data.access}`); // Debugging line
+
 				// Fetch user details
 				const userRes = await api.get("/api/user/", {
 					headers: {
@@ -49,9 +52,6 @@ export default function Login() {
 				});
 
 				localStorage.setItem("userData", JSON.stringify(userRes.data));
-
-				console.log("ACCESS_TOKEN:", localStorage.getItem("ACCESS_TOKEN"));
-				console.log("REFRESH_TOKEN:", localStorage.getItem("REFRESH_TOKEN"));
 				// Reset loading state and redirect
 				setLoading(false);
 				navigate("/home");

@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";import api from "../../assets/api";import logo from "../../assets/img/logo.png";import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
-import DarkModeToggle from "../DarkModeToggle";
+import { useEffect, useState } from "react";import api from "../../assets/api";import logo from "../../assets/img/logo.png";import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";import DarkModeToggle from "../DarkModeToggle";
 import Modal from "@mui/material/Modal";
 
 function Background() {
@@ -42,17 +41,14 @@ function Background() {
 	}
 
 	// Base URL of your Django server
-	const baseURL = "https://gasstationapi.pythonanywhere.com";
-	// https://gasstationapi.pythonanywhere.com
-	// http://127.0.0.1:8000
-
+	
 	return (
 		<>
 			<DarkModeToggle />
 			<div className="bg-red-400 dark:bg-red-900 relative">
 				<div className="h-[240px] overflow-hidden">
 					<img
-						src={`${baseURL}/${profile.business_permit}`}
+						src={`${import.meta.env.VITE_API_URL}/${profile.business_permit}`}
 						alt="Logo"
 						className=""
 					/>
