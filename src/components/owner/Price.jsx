@@ -1,11 +1,12 @@
-import TrendingDownSharpIcon from "@mui/icons-material/TrendingDownSharp";import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
+import TrendingDownSharpIcon from "@mui/icons-material/TrendingDownSharp";
+import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import LocalGasStationOutlinedIcon from "@mui/icons-material/LocalGasStationOutlined";
 import Modal from "@mui/material/Modal";
 import { useId, useState, useEffect } from "react";
 import api from "../../assets/api";
 
-function Promos() {
+function Price() {
 	const [open, setOpen] = useState(false);
 	const [gasolineName, setGasolineName] = useState("");
 	const [price, setPrice] = useState("");
@@ -72,10 +73,10 @@ function Promos() {
 							<p>Loading...</p>
 						) : error ? (
 							<p className="text-red-600">Error: {error}</p>
-						) : (
+						) : gasolines.length > 0 ? (
 							gasolines.map((gasoline) => (
 								<div
-									key={gasoline.id}
+									key={gasoline.id} // Ensure gasoline.id is unique
 									className="flex flex-row w-full items-center p-2 rounded-lg shadow-sm mb-2">
 									<div className="flex flex-row items-center">
 										<LocalGasStationOutlinedIcon
@@ -92,6 +93,8 @@ function Promos() {
 									</div>
 								</div>
 							))
+						) : (
+							<p>No gasolines available.</p>
 						)}
 					</div>
 				</div>
@@ -167,4 +170,4 @@ function Promos() {
 	);
 }
 
-export default Promos;
+export default Price;
