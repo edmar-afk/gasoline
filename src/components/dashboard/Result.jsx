@@ -15,7 +15,7 @@ function Result({ results }) {
 						results.map((result) => (
 							<motion.li
 								key={result.id} // Add a unique key for each list item
-								className="py-3 sm:py-4 bg-gray-800 px-4 rounded-xl mb-4"
+								className="py-3 sm:py-4 bg-gray-100 dark:bg-gray-800 px-4 rounded-xl mb-4"
 								initial={{ scale: 0 }}
 								animate={{ scale: 1 }}
 								transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.1 }}>
@@ -29,7 +29,7 @@ function Result({ results }) {
 										{/* Map over gasoline_entries */}
 										{result.gasoline_entries && result.gasoline_entries.length > 0 ? (
 											<div className="mt-2">
-												<p className="font-semibold text-gray-700 dark:text-gray-300 text-xs">Gasoline Entries:</p>
+												<p className="font-semibold text-gray-700 dark:text-white text-xs">Gasoline Entries:</p>
 												<ul className="mt-1">
 													{result.gasoline_entries.map((gasoline) => (
 														<li
