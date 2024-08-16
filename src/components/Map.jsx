@@ -1,20 +1,21 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */import { useState } from "react";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+
 const defaultCenter = [7.7114933, 123.2930602]; // Default to JHCSC Main Campus Gymnasium
-// eslint-disable-next-line react/prop-types
+
 const UpdateMapView = ({ center }) => {
 	const map = useMap();
 	map.setView(center, map.getZoom());
 	return null;
 };
 
-const Map = () => {
+// eslint-disable-next-line react/prop-types
+const Map = ({ onSearchQueryChange }) => {
 	const [userLocation, setUserLocation] = useState(defaultCenter);
 	const [searchQuery, setSearchQuery] = useState("");
 	const [statusMessage, setStatusMessage] = useState("");
-	const [locationText, setLocationText] = useState("");
 
 	const fetchCoordinates = async (query) => {
 		try {
@@ -25,11 +26,9 @@ const Map = () => {
 			if (data.length > 0) {
 				const { lat, lon } = data[0];
 				setUserLocation([parseFloat(lat), parseFloat(lon)]);
-				setLocationText(data[0].display_name || `Latitude ${lat}, Longitude ${lon}`);
 				setStatusMessage("");
 			} else {
 				setStatusMessage("Location not found.");
-				setLocationText("");
 			}
 		} catch (error) {
 			console.error("Error fetching coordinates:", error);
@@ -41,6 +40,7 @@ const Map = () => {
 		e.preventDefault();
 		if (searchQuery) {
 			fetchCoordinates(searchQuery);
+			onSearchQueryChange(searchQuery); // Pass the search query to the parent component
 		}
 	};
 
@@ -72,7 +72,6 @@ const Map = () => {
 					Search
 				</button>
 			</form>
-			<p className="absolute bottom-5 text-center left-0 p-2 z-50 w-full">{locationText}</p>
 			<div className="absolute inset-0 z-10">
 				{statusMessage && <p className="absolute top-0 left-0 mt-8 bg-white p-2">{statusMessage}</p>}
 				<MapContainer

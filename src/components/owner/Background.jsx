@@ -4,9 +4,11 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 import DarkModeToggle from "../DarkModeToggle";
 import Modal from "@mui/material/Modal";
 import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css"; // Ensure to import CSS
+
 function Background() {
 	const userData = JSON.parse(localStorage.getItem("userData"));
-	const userId = userData?.id; // Adjust according to your user data structure
+	const userId = userData?.id;
 	const [profile, setProfile] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -34,7 +36,7 @@ function Background() {
 
 		fetchProfile();
 	}, [userId]);
-	// console.log(profile);
+
 	if (loading) {
 		return <div>Loading...</div>;
 	}
@@ -42,8 +44,6 @@ function Background() {
 	if (error) {
 		return <div>{error}</div>;
 	}
-
-	// Base URL of your Django server
 
 	return (
 		<>
@@ -54,7 +54,7 @@ function Background() {
 						<img
 							src={`${import.meta.env.VITE_API_URL}/${profile.business_permit}`}
 							alt="Logo"
-							style={{ cursor: "zoom-in" }}
+							style={{ cursor: "zoom-in", width: "100%", height: "auto" }}
 						/>
 					</Zoom>
 				</div>
@@ -71,7 +71,7 @@ function Background() {
 				/>
 				<p
 					onClick={handleOpen}
-					className="mt-2 w-fit p-2 rounded-full text-xs  bg-blue-200 dark:bg-blue-900 text-blue-900 dark:text-blue-200 shadow-xl">
+					className="mt-2 w-fit p-2 rounded-full text-xs bg-blue-200 dark:bg-blue-900 text-blue-900 dark:text-blue-200 shadow-xl cursor-pointer">
 					<ModeEditOutlineOutlinedIcon fontSize="small" />
 				</p>
 			</div>

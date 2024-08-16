@@ -1,9 +1,8 @@
-import TrendingDownSharpIcon from "@mui/icons-material/TrendingDownSharp";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import LocalGasStationOutlinedIcon from "@mui/icons-material/LocalGasStationOutlined";
 import Modal from "@mui/material/Modal";
-import { useId, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import api from "../../assets/api";
 
 function Price() {

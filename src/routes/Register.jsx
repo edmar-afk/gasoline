@@ -1,9 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */ import React from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import { useNavigate, Link } from "react-router-dom";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
+/* eslint-disable react/no-unescaped-entities */ import React from "react";import Button from "@mui/material/Button";import TextField from "@mui/material/TextField";import { useNavigate, Link } from "react-router-dom";import Paper from "@mui/material/Paper";import Grid from "@mui/material/Grid";
 import logo from "../assets/img/logo.png";
 import { motion } from "framer-motion";
 import ArrowBackIosOutlinedIcon from "@mui/icons-material/ArrowBackIosOutlined";
@@ -16,6 +11,7 @@ export default function Register() {
 	const navigate = useNavigate();
 
 	const [account, setAccount] = React.useState({
+		address: "",
 		email: "",
 		stationName: "",
 		password: "",
@@ -24,6 +20,7 @@ export default function Register() {
 	});
 
 	const [errors, setErrors] = React.useState({
+		address: "",
 		email: "",
 		stationName: "",
 		password: "",
@@ -45,11 +42,17 @@ export default function Register() {
 	const validateForm = () => {
 		let isValid = true;
 		const newErrors = {
+			address: "",
 			email: "",
 			stationName: "",
 			password: "",
 			password2: "",
 		};
+
+		if (!account.address) {
+			newErrors.address = "Address is required.";
+			isValid = false;
+		}
 
 		if (!account.email) {
 			newErrors.email = "Email is required.";
@@ -91,6 +94,7 @@ export default function Register() {
 
 		const formData = new FormData();
 		formData.append("first_name", account.stationName);
+		formData.append("last_name", account.address);
 		formData.append("email", account.email);
 		formData.append("username", account.email); // Assuming username is same as email
 		formData.append("password", account.password);
@@ -217,6 +221,33 @@ export default function Register() {
 									className={`bg-transparent ${errors.email ? "border-red-500" : ""}`}
 								/>
 								{errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+							</motion.div>
+
+							<motion.div
+								initial={{ opacity: 0, y: 50 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{
+									type: "spring",
+									stiffness: 160,
+									damping: 30,
+									delay: 0.2,
+								}}>
+								<TextField
+									onChange={(event) => handleAccountChange("address", event)}
+									variant="outlined"
+									margin="normal"
+									required
+									fullWidth
+									id="address"
+									label="Address (Purok, Barangay, City, Province)"
+									name="address"
+									autoFocus
+									className={`bg-transparent ${errors.address ? "border-red-500" : ""}`}
+								/>
+								{errors.address && <p className="text-red-500 text-sm">{errors.address}</p>}
+								<p className="text-xs text-gray-400 mb-8">
+									Complete your address so consumers can see your gasoline station{" "}
+								</p>
 							</motion.div>
 
 							<motion.div
