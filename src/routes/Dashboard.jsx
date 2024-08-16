@@ -3,13 +3,14 @@ import DarkModeToggle from "../components/DarkModeToggle";
 import Result from "../components/dashboard/Result";
 import { useState, useEffect } from "react";
 import api from "../assets/api";
+import Navbar from '../components/NavBar'
 
 function Dashboard() {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [results, setResults] = useState([]);
 
 	// Default text when searchQuery is empty
-	const displayText = searchQuery ? searchQuery : "Search for a location";
+	const displayText = searchQuery ? searchQuery : "Search for a location of";
 
 	useEffect(() => {
 		api
@@ -40,6 +41,7 @@ function Dashboard() {
 					<Result results={results} />
 				</div>
 			</main>
+			<Navbar/>
 		</div>
 	);
 }

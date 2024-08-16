@@ -1,5 +1,4 @@
-import * as React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";import PropTypes from "prop-types";
 import { Global } from "@emotion/react";
 import { styled } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -95,8 +94,8 @@ function NarBar(props) {
 									type: "spring",
 									stiffness: 260,
 									damping: 20,
-								}}>
-								Hello
+								}} className="text-center mt-4">
+								Available on capstone 2
 							</motion.p>
 						)}
 					</div>
