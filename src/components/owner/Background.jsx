@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";import api from "../../assets/api";
-import logo from "../../assets/img/logo.png";
-import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import { useEffect, useState } from "react";import api from "../../assets/api";import logo from "../../assets/img/logo.png";import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import DarkModeToggle from "../DarkModeToggle";
 import Modal from "@mui/material/Modal";
 
@@ -52,14 +50,16 @@ function Background() {
 		<>
 			<DarkModeToggle />
 			<div className="bg-red-400 dark:bg-red-900 relative">
-				<img
-					src={`${baseURL}/${profile.business_permit}`}
-					alt="Logo"
-					className="h-[240px]"
-				/>
-				<div className="absolute top-[270px] left-4 dark:text-white font-bold text-xl w-[230px] z-50">
+				<div className="h-[240px] overflow-hidden">
+					<img
+						src={`${baseURL}/${profile.business_permit}`}
+						alt="Logo"
+						className=""
+					/>
+				</div>
+				<div className="absolute top-[270px] left-4 dark:text-white font-bold text-sm w-[230px] z-50">
 					<p>{userData.first_name}</p>
-					<p className="text-sm">{userData.email}</p>
+					<p className="text-xs font-light">{userData.email}</p>
 				</div>
 			</div>
 			<div className="flex flex-col items-center z-50 absolute top-[150px] right-2">
