@@ -1,5 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */ import React from "react";import Button from "@mui/material/Button";import TextField from "@mui/material/TextField";import { useNavigate, Link } from "react-router-dom";import Paper from "@mui/material/Paper";import Grid from "@mui/material/Grid";
-import logo from "../assets/img/logo.png";
+/* eslint-disable react/no-unescaped-entities */ import React from "react";import Button from "@mui/material/Button";import TextField from "@mui/material/TextField";import { useNavigate, Link } from "react-router-dom";import Paper from "@mui/material/Paper";import Grid from "@mui/material/Grid";import logo from "../assets/img/logo.png";
 import { motion } from "framer-motion";
 import ArrowBackIosOutlinedIcon from "@mui/icons-material/ArrowBackIosOutlined";
 import api from "../assets/api";
@@ -128,7 +127,7 @@ export default function Register() {
 
 	return (
 		<>
-			<div className="h-screen bg-white">
+			<div className="h-screen bg-white pt-14">
 				<Link
 					to={"/"}
 					className="p-3 flex items-center fixed">

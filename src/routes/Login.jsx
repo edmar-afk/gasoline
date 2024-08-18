@@ -1,5 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */ import { useState, useEffect } from "react";
-import Button from "@mui/material/Button";
+/* eslint-disable react/no-unescaped-entities */ import { useState, useEffect } from "react";import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
@@ -69,7 +68,7 @@ export default function Login() {
 	};
 
 	return (
-		<div className="h-screen bg-white">
+		<div className="h-screen bg-white pt-14">
 			<Link
 				to={"/"}
 				className="p-3 flex items-center fixed">

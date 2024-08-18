@@ -6,7 +6,7 @@ import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 function Homepage() {
 	return (
 		<>
-			<div className="bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 h-screen">
+			<div className="bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 h-screen pt-14">
 				<div className="flex flex-col items-center float-start p-2 fixed">
 					<Link to={"/login"}>
 						<Person2OutlinedIcon className="text-blue-500" />
