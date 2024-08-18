@@ -40,8 +40,8 @@ function Homepage() {
 							initial={{ opacity: 0, x: 20 }}
 							animate={{ opacity: 1, x: 0 }}
 							transition={{ duration: 1 }}
-							className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48">
-							Stay updated on the latest fuel prices at various stations from San Miguel to Guipos to help you make
+							className="mb-8 text-sm font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48">
+							Stay updated on the latest fuel prices at various stations from Lapuyan, San Miguel to Guipos to help you make
 							informed decisions and save money on your next fill-up.
 						</motion.p>
 						<motion.div

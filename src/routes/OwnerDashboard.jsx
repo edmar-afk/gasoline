@@ -1,4 +1,5 @@
-import { useState } from "react";import Background from "../components/owner/Background";
+import { useState } from "react";
+import Background from "../components/owner/Background";
 import Images from "../components/owner/Images";
 import Pricing from "../components/owner/Pricing";
 import Promos from "../components/owner/Promos";
@@ -20,8 +21,13 @@ function OwnerDashboard() {
 			/>
 			{selectedView === "promos" ? <Promos /> : <Price />}
 
-			<div>
-				<Link to={"/logout"}>Logout</Link> {/* Added text for the link */}
+			<div className="mx-4 mb-4">
+				<Link
+					to={"/logout"}
+					className="bg-red-400 dark:bg-red-600 text-white w-full flex justify-center py-2 rounded-full">
+					Logout
+				</Link>{" "}
+				{/* Added text for the link */}
 			</div>
 		</>
 	);

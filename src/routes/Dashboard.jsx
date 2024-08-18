@@ -34,7 +34,7 @@ function Dashboard() {
 				<Map onSearchQueryChange={handleSearchQueryChange} />
 
 				<h5 className="text-2xl font-bold text-gray-900 dark:text-white mt-12 ml-8">
-					<span className="text-white capitalize">{displayText}</span> <br /> Gasoline Station
+					<span className="text-gray-800 dark:text-white capitalize">{displayText}</span> <br /> Gasoline Station
 				</h5>
 
 				<div className="p-2 mb-24">

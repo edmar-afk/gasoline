@@ -4,9 +4,13 @@ import LocalGasStationOutlinedIcon from "@mui/icons-material/LocalGasStationOutl
 import Modal from "@mui/material/Modal";
 import { useState, useEffect } from "react";
 import api from "../../assets/api";
+import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
+import EditGasoline from "./EditGasoline";
 
 function Price() {
 	const [open, setOpen] = useState(false);
+	const [editOpen, setEditOpen] = useState(false); // State for editing modal
+	const [currentEditId, setCurrentEditId] = useState(null); // State for storing the ID of the gasoline being edited
 	const [gasolineName, setGasolineName] = useState("");
 	const [price, setPrice] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -16,19 +20,20 @@ function Price() {
 
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
+	const handleEditClose = () => setEditOpen(false); // Function to close the edit modal
+
+	const fetchGasolines = async () => {
+		try {
+			const response = await api.get("/api/gasoline/");
+			setGasolines(response.data);
+		} catch (error) {
+			setError(error.message);
+		} finally {
+			setFetching(false);
+		}
+	};
 
 	useEffect(() => {
-		const fetchGasolines = async () => {
-			try {
-				const response = await api.get("/api/gasoline/");
-				setGasolines(response.data);
-			} catch (error) {
-				setError(error.message);
-			} finally {
-				setFetching(false);
-			}
-		};
-
 		fetchGasolines();
 	}, []);
 
@@ -40,20 +45,39 @@ function Price() {
 			const response = await api.post("/api/gasoline/create/", {
 				type: gasolineName,
 				price: price,
-				// No need to send user_id, as it's handled server-side
 			});
 			console.log("Gasoline added successfully:", response.data);
 			setGasolineName("");
 			setPrice("");
 			handleClose(); // Close the modal after successful submission
-			// Fetch updated gasoline list after adding new gasoline
-			const updatedResponse = await api.get("/api/gasoline/");
-			setGasolines(updatedResponse.data);
+			fetchGasolines(); // Refetch the gasoline list
 		} catch (error) {
 			console.error("Error adding gasoline:", error.response?.data || error.message);
 		} finally {
 			setLoading(false);
 		}
+	};
+
+	const handleDelete = async (id) => {
+		if (window.confirm("Are you sure you want to delete this gasoline?")) {
+			try {
+				setFetching(true);
+				await api.delete(`/api/gasoline/${id}/delete/`);
+				setGasolines((prevGasolines) => prevGasolines.filter((gasoline) => gasoline.id !== id));
+				setError(null);
+				alert("Gasoline deleted successfully.");
+			} catch (err) {
+				setError("Failed to delete gasoline.");
+				alert("There was an error deleting the gasoline.");
+			} finally {
+				setFetching(false);
+			}
+		}
+	};
+
+	const handleEditClick = (id) => {
+		setCurrentEditId(id); // Set the ID of the gasoline to be edited
+		setEditOpen(true); // Open the edit modal
 	};
 
 	return (
@@ -87,8 +111,15 @@ function Price() {
 											<p className="text-sm">₱{gasoline.price} per litre</p>
 										</div>
 									</div>
-									<div className="ml-auto">
-										<DeleteForeverOutlinedIcon className="text-red-600 cursor-pointer" />
+									<div className="ml-auto flex flex-row items-center">
+										<BorderColorOutlinedIcon
+											className="text-blue-600 cursor-pointer mr-1"
+											onClick={() => handleEditClick(gasoline.id)} // Trigger edit modal
+										/>
+										<DeleteForeverOutlinedIcon
+											className="text-red-600 cursor-pointer"
+											onClick={() => handleDelete(gasoline.id)}
+										/>
 									</div>
 								</div>
 							))
@@ -156,13 +187,29 @@ function Price() {
 											type="submit"
 											className="w-full rounded-md bg-orange-400 dark:bg-blue-600 px-3 py-2 text-white focus:bg-gray-600 dark:focus:bg-gray-700 focus:outline-none"
 											disabled={loading}>
-											{loading ? "Adding..." : "Add"}
+											{loading ? "Saving..." : "Save"}
 										</button>
 									</div>
 								</form>
 							</div>
 						</div>
 					</div>
+				</div>
+			</Modal>
+
+			{/* Edit Modal */}
+			<Modal
+				open={editOpen}
+				onClose={handleEditClose}
+				aria-labelledby="modal-edit-title"
+				aria-describedby="modal-edit-description">
+				<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[95%] bg-white dark:bg-gray-900 shadow-xl p-4">
+					<EditGasoline
+						id={currentEditId}
+						open={editOpen}
+						handleClose={handleEditClose}
+						refetchGasolines={fetchGasolines} // Pass refetch function as prop
+					/>
 				</div>
 			</Modal>
 		</>
