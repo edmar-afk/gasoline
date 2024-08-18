@@ -1,5 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */ import { Link } from "react-router-dom";
-import logo from "../assets/img/logo.png";
+/* eslint-disable react/no-unescaped-entities */ import { Link } from "react-router-dom";import logo from "../assets/img/logo.png";
 import { motion } from "framer-motion";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 
@@ -41,8 +40,8 @@ function Homepage() {
 							animate={{ opacity: 1, x: 0 }}
 							transition={{ duration: 1 }}
 							className="mb-8 text-sm font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48">
-							Stay updated on the latest fuel prices at various stations from Lapuyan, San Miguel to Guipos to help you make
-							informed decisions and save money on your next fill-up.
+							Stay updated on the latest fuel prices at various stations from Lapuyan, San Miguel to Guipos to help you
+							make informed decisions and save money on your next refuel.
 						</motion.p>
 						<motion.div
 							initial={{ opacity: 0, y: 0 }}
