@@ -29,7 +29,7 @@ const Puller = styled("div")(({ theme }) => ({
 }));
 
 function NarBar(props) {
-	const { window } = props;
+	const { window, promos } = props;
 	const [open, setOpen] = React.useState(false);
 
 	const toggleDrawer = (newOpen) => () => {
@@ -77,7 +77,8 @@ function NarBar(props) {
 					<Typography
 						sx={{ p: 2, color: "text.secondary" }}
 						className="text-center">
-						<b className="text-blue-400 font-bold animate-bounce">0</b> Active promos around Guipos area
+						<b className="text-blue-400 font-bold animate-bounce">0</b> Active Gasoline promos around{" "}
+						{promos || "your area"}
 					</Typography>
 				</StyledBox>
 				<StyledBox
@@ -94,7 +95,8 @@ function NarBar(props) {
 									type: "spring",
 									stiffness: 260,
 									damping: 20,
-								}} className="text-center mt-4">
+								}}
+								className="text-center mt-4">
 								Available on capstone 2
 							</motion.p>
 						)}
@@ -106,11 +108,8 @@ function NarBar(props) {
 }
 
 NarBar.propTypes = {
-	/**
-	 * Injected by the documentation to work in an iframe.
-	 * You won't need it on your project.
-	 */
 	window: PropTypes.func,
+	promos: PropTypes.string,
 };
 
 export default NarBar;
