@@ -6,7 +6,7 @@ function Homepage() {
 	return (
 		<>
 			<div className="bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 h-screen pt-14">
-				<div className="flex flex-col items-center float-start p-2 fixed">
+				<div className="flex flex-col items-center float-start p-2 fixed left-4">
 					<Link to={"/login"}>
 						<Person2OutlinedIcon className="text-blue-500" />
 						<p className="text-blue-400 text-xs -mt-1">Login</p>

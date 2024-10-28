@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import api from "../../assets/api";
+import { useEffect, useState } from "react";import api from "../../assets/api";
 import logo from "../../assets/img/logo.png";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import DarkModeToggle from "../DarkModeToggle";
@@ -16,19 +15,24 @@ function Background() {
 		first_name: userData?.first_name || "",
 		last_name: userData?.last_name || "",
 		email: userData?.email || "",
+		profile_pic: null, // To store the uploaded profile picture
 	});
-
+	const [previewImage, setPreviewImage] = useState(null); // For image preview
 	const [open, setOpen] = useState(false);
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
 
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => {
+		setOpen(false);
+		setPreviewImage(null); // Reset preview on modal close
+	};
+
+	// Fetch profile data
 	useEffect(() => {
 		const fetchProfile = async () => {
 			if (userData?.id) {
 				setLoading(true);
 				try {
 					const response = await api.get(`/api/profile/${userData.id}/`);
-
 					setProfile(response.data);
 					setFormData({
 						first_name: response.data.first_name,
@@ -45,10 +49,10 @@ function Background() {
 				setError("User ID not found");
 			}
 		};
-
 		fetchProfile();
 	}, [userData]); // Fetch profile when userData changes
 
+	// Handle input changes
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 		setFormData((prevData) => ({
@@ -57,6 +61,19 @@ function Background() {
 		}));
 	};
 
+	// Handle file changes
+	const handleFileChange = (e) => {
+		const file = e.target.files[0];
+		if (file) {
+			setFormData((prevData) => ({
+				...prevData,
+				profile_pic: file,
+			}));
+			setPreviewImage(URL.createObjectURL(file)); // Set preview image
+		}
+	};
+
+	// Handle profile form submission
 	const handleProfileSubmit = async (e) => {
 		e.preventDefault();
 		const updatedUserData = {
@@ -68,11 +85,20 @@ function Background() {
 		setLoading(true);
 
 		try {
+			// Update user profile data
 			await api.patch(`/api/profile/update/`, updatedUserData);
-			alert("Profile updated successfully!");
 
-			// Reload the page to reflect changes
-			window.location.reload();
+			// Check if a profile picture is selected
+			if (formData.profile_pic) {
+				const formDataPic = new FormData();
+				formDataPic.append("profile_pic", formData.profile_pic);
+
+				// Send profile pic to backend
+				await api.put(`/api/update-profile-pic/`, formDataPic);
+			}
+
+			alert("Profile updated successfully!");
+			window.location.reload(); // Refresh the page
 		} catch (error) {
 			console.error("Error updating user:", error);
 			setError("Error updating user");
@@ -109,9 +135,9 @@ function Background() {
 			</div>
 			<div className="flex flex-col items-center z-50 absolute top-[150px] right-2">
 				<img
-					src={logo}
+					src={profile?.profile_pic ? `${import.meta.env.VITE_API_URL}/${profile.profile_pic}` : logo}
 					className="w-[130px] bg-white rounded-full border-4 border-blue-800 shadow-xl"
-					alt="Logo"
+					alt="Profile"
 				/>
 				<p
 					onClick={handleOpen}
@@ -144,7 +170,7 @@ function Background() {
 								<label
 									htmlFor="first_name"
 									className="pointer-events-none absolute top-0 left-0 origin-left -translate-y-1/2 transform text-sm opacity-75 text-gray-800 dark:text-gray-100 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 dark:peer-placeholder-shown:text-gray-400 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800 dark:peer-focus:text-gray-300">
-									Station Name
+									First Name
 								</label>
 							</div>
 							<div className="relative mt-9">
@@ -160,7 +186,7 @@ function Background() {
 								<label
 									htmlFor="last_name"
 									className="pointer-events-none absolute top-0 left-0 origin-left -translate-y-1/2 transform text-sm opacity-75 text-gray-800 dark:text-gray-100 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 dark:peer-placeholder-shown:text-gray-400 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800 dark:peer-focus:text-gray-300">
-									Station Address
+									Last Name
 								</label>
 							</div>
 							<div className="relative mt-9">
@@ -179,13 +205,28 @@ function Background() {
 									Email
 								</label>
 							</div>
-
-							<div className="my-6">
+							<div className="relative mt-9">
+								<input
+									type="file"
+									name="profile_pic"
+									id="profile_pic"
+									accept="image/*"
+									onChange={handleFileChange}
+									className="block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+								/>
+								{previewImage && (
+									<img
+										src={previewImage}
+										alt="Profile Preview"
+										className="mt-4 max-w-xs rounded-full"
+									/>
+								)}
+							</div>
+							<div className="mt-9 text-right">
 								<button
 									type="submit"
-									className="w-full rounded-md bg-blue-400 dark:bg-blue-600 px-3 py-2 text-white focus:bg-gray-600 dark:focus:bg-gray-700 focus:outline-none"
-									disabled={loading}>
-									{loading ? "Saving..." : "Save"}
+									className="bg-blue-600 text-white dark:bg-blue-900 dark:text-gray-200 px-4 py-2 rounded-full shadow-lg hover:bg-blue-500 dark:hover:bg-blue-800">
+									Update Profile
 								</button>
 							</div>
 						</form>
