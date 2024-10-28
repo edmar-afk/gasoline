@@ -1,11 +1,7 @@
-import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
-import { useState, useEffect } from "react";
-import api from "../../assets/api";
-
-function Images() {
+import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";import { useState, useEffect } from "react";import api from "../../assets/api";function Images() {
 	const [userData] = useState(() => JSON.parse(localStorage.getItem("userData")));
 	const [userImages, setUserImages] = useState([]);
-
+	console.log(userImages)
 	// Fetch images on component mount
 	useEffect(() => {
 		const fetchUserImages = async () => {
@@ -61,9 +57,9 @@ function Images() {
 					/>
 				</label>
 
-				{userImages.map((image) => (
+				{userImages.map((image, index) => (
 					<div
-						key={image.id}
+						key={image.id || index} // Fallback to index if image.id is not unique or undefined
 						className="border-2 h-[130px] mx-1 min-w-[120px] rounded-xl bg-gray-200 dark:bg-gray-800 border-gray-300 dark:border-gray-700 flex items-center">
 						<img
 							src={image.imges}
