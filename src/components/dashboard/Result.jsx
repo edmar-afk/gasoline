@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */ import RemoveRedEyeSharpIcon from "@mui/icons-material/RemoveRedEyeSharp";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 function Result({ results }) {
 	console.log(results);
@@ -44,9 +45,9 @@ function Result({ results }) {
 											<p className="text-sm text-gray-500 dark:text-gray-400">No gasoline entries</p>
 										)}
 									</div>
-									<div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+									<Link to={`/station/${result.id}`} className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
 										<RemoveRedEyeSharpIcon />
-									</div>
+									</Link>
 								</div>
 							</motion.li>
 						))

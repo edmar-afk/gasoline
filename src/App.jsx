@@ -8,6 +8,7 @@ import Login from "./routes/Login";
 import Register from "./routes/Register";
 import OwnerDashboard from "./routes/OwnerDashboard";
 import { useEffect } from "react";
+import Profile from "./components/stations/Profile";
 
 function Logout() {
 	localStorage.clear();
@@ -61,6 +62,10 @@ function App() {
 							<Route
 								path="/home"
 								element={<OwnerDashboard />}
+							/>
+							<Route
+								path="/station/:userId"
+								element={<Profile />}
 							/>
 							<Route
 								path="/"

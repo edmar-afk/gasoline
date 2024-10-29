@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";import api from "../../assets/api";
+import { useEffect, useState } from "react";
+import api from "../../assets/api";
 import logo from "../../assets/img/logo.png";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import DarkModeToggle from "../DarkModeToggle";
@@ -6,8 +7,11 @@ import Modal from "@mui/material/Modal";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 
-function Background() {
-	const [userData, setUserData] = useState(() => JSON.parse(localStorage.getItem("userData")));
+function Background(ownerId) {
+	const [userData, ] = useState(() => {
+		const storedUserData = JSON.parse(localStorage.getItem("userData"));
+		return storedUserData || ownerId;
+	});
 	const [profile, setProfile] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
