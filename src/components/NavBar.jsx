@@ -1,12 +1,7 @@
-import * as React from "react";import PropTypes from "prop-types";
-import { Global } from "@emotion/react";
-import { styled } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import { grey } from "@mui/material/colors";
-import Typography from "@mui/material/Typography";
+import * as React from "react";import PropTypes from "prop-types";import { Global } from "@emotion/react";import { styled } from "@mui/material/styles";import CssBaseline from "@mui/material/CssBaseline";import { grey } from "@mui/material/colors";import Typography from "@mui/material/Typography";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import { motion } from "framer-motion";
-
+import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 const drawerBleeding = 56;
 
 const Root = styled("div")(({ theme }) => ({
@@ -29,14 +24,35 @@ const Puller = styled("div")(({ theme }) => ({
 }));
 
 function NarBar(props) {
-	const { window, promos } = props;
+	const { window, area, results } = props;
 	const [open, setOpen] = React.useState(false);
 
 	const toggleDrawer = (newOpen) => () => {
 		setOpen(newOpen);
 	};
 
-	// This is used only for the example
+	// Function to find the cheapest gasoline prices
+	const findCheapestGasoline = (stations) => {
+		const cheapestPrices = {};
+
+		stations.forEach((station) => {
+			station.gasoline_entries.forEach((entry) => {
+				if (!cheapestPrices[entry.type] || entry.price < cheapestPrices[entry.type].price) {
+					cheapestPrices[entry.type] = {
+						station: station,
+						price: entry.price,
+					};
+				}
+			});
+		});
+
+		return cheapestPrices;
+	};
+
+	// Get the cheapest gasoline prices for each type
+	const cheapestGasPrices = findCheapestGasoline(results);
+	const gasolineTypes = Object.keys(cheapestGasPrices);
+
 	const container = window !== undefined ? () => window().document.body : undefined;
 
 	return (
@@ -45,14 +61,12 @@ function NarBar(props) {
 			<Global
 				styles={{
 					".MuiDrawer-root > .MuiPaper-root": {
-						height: `calc(50% - ${drawerBleeding}px)`,
+						height: `calc(70% - ${drawerBleeding}px)`,
 						overflow: "visible",
 					},
 				}}
 			/>
-
 			<SwipeableDrawer
-				className="bg-white/20 dark:bg-gray-800/20 duration-300"
 				container={container}
 				anchor="bottom"
 				open={open}
@@ -60,9 +74,7 @@ function NarBar(props) {
 				onOpen={toggleDrawer(true)}
 				swipeAreaWidth={drawerBleeding}
 				disableSwipeToOpen={false}
-				ModalProps={{
-					keepMounted: true,
-				}}>
+				ModalProps={{ keepMounted: true }}>
 				<StyledBox
 					sx={{
 						position: "absolute",
@@ -77,28 +89,57 @@ function NarBar(props) {
 					<Typography
 						sx={{ p: 2, color: "text.secondary" }}
 						className="text-center">
-						<b className="text-blue-400 font-bold animate-bounce">0</b> Active Gasoline promos around{" "}
-						{promos || "your area"}
+						<p className="text-gray-800 text-sm mt-3">
+							Statistics of Cheapest Gasoline Types around {area || "your area"}
+						</p>
 					</Typography>
 				</StyledBox>
-				<StyledBox
-					sx={{
-						height: "100%",
-						overflow: "auto",
-					}}>
-					<div className="bg-white text-gray-800 dark:text-white dark:bg-gray-800 duration-300 p-3 h-screen">
+				<StyledBox sx={{ height: "100%", overflow: "auto" }}>
+					<div className="bg-white text-gray-800 dark:text-white dark:bg-gray-800 duration-300 p-3 ">
 						{open && (
-							<motion.p
+							<motion.div
 								initial={{ scale: 0 }}
 								animate={{ scale: 1 }}
-								transition={{
-									type: "spring",
-									stiffness: 260,
-									damping: 20,
-								}}
-								className="text-center mt-4">
-								Available on capstone 2
-							</motion.p>
+								transition={{ type: "spring", stiffness: 260, damping: 20 }}>
+								{gasolineTypes.length > 0 ? (
+									gasolineTypes.map((type, index) => {
+										const { station, price } = cheapestGasPrices[type];
+										return (
+											<div
+												key={index} // Using index as the key
+												className="my-3 rounded-lg shadow-md">
+												<label className="cursor-pointer">
+													<input
+														type="radio"
+														className="peer sr-only"
+														name="pricing"
+													/>
+													<div className="w-full rounded-md mb-2 bg-gray-50 dark:bg-gray-900 p-5 text-gray-600 dark:text-gray-300 ring-2 ring-transparent transition-all hover:shadow peer-checked:text-sky-600 peer-checked:ring-blue-400 peer-checked:ring-offset-2">
+														<div className="flex flex-col gap-1">
+															<div className="flex items-center justify-between">
+																<p className="text-sm font-semibold uppercase text-gray-500 dark:text-gray-400">
+																	{station.first_name}
+																</p>
+																<div>
+																	<LocalGasStationIcon/>
+																</div>
+															</div>
+															<div className="flex items-end justify-between">
+																<p>
+																	cheapest <span className="text-lg font-bold">{type}</span> gasoline:
+																</p>
+																<p className="text-sm font-bold">₱{price}/litre</p>
+															</div>
+														</div>
+													</div>
+												</label>
+											</div>
+										);
+									})
+								) : (
+									<p className="text-sm text-gray-500 dark:text-gray-400">No gasoline entries available</p>
+								)}
+							</motion.div>
 						)}
 					</div>
 				</StyledBox>
@@ -109,7 +150,8 @@ function NarBar(props) {
 
 NarBar.propTypes = {
 	window: PropTypes.func,
-	promos: PropTypes.string,
+	area: PropTypes.string,
+	results: PropTypes.array.isRequired,
 };
 
 export default NarBar;

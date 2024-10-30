@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import api from "../../assets/api";
+import { useEffect, useState } from "react";import api from "../../assets/api";
 import logo from "../../assets/img/logo.png";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import DarkModeToggle from "../DarkModeToggle";
@@ -140,7 +139,7 @@ function Background(ownerId) {
 			<div className="flex flex-col items-center z-50 absolute top-[150px] right-2">
 				<img
 					src={profile?.profile_pic ? `${import.meta.env.VITE_API_URL}/${profile.profile_pic}` : logo}
-					className="w-[130px] bg-white rounded-full border-4 border-blue-800 shadow-xl"
+					className="w-[130px] h-[130px] bg-white rounded-full border-4 border-blue-800 shadow-xl"
 					alt="Profile"
 				/>
 				<p
@@ -222,7 +221,7 @@ function Background(ownerId) {
 									<img
 										src={previewImage}
 										alt="Profile Preview"
-										className="mt-4 max-w-xs rounded-full"
+										className="mt-4 w-20 mx-auto rounded-full"
 									/>
 								)}
 							</div>
