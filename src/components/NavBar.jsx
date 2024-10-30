@@ -1,4 +1,10 @@
-import * as React from "react";import PropTypes from "prop-types";import { Global } from "@emotion/react";import { styled } from "@mui/material/styles";import CssBaseline from "@mui/material/CssBaseline";import { grey } from "@mui/material/colors";import Typography from "@mui/material/Typography";
+import * as React from "react";
+import PropTypes from "prop-types";
+import { Global } from "@emotion/react";
+import { styled } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { grey } from "@mui/material/colors";
+import Typography from "@mui/material/Typography";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import { motion } from "framer-motion";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
@@ -121,7 +127,7 @@ function NarBar(props) {
 																	{station.first_name}
 																</p>
 																<div>
-																	<LocalGasStationIcon/>
+																	<LocalGasStationIcon />
 																</div>
 															</div>
 															<div className="flex items-end justify-between">

@@ -1,8 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */ import { Link } from "react-router-dom";import logo from "../assets/img/logo.png";
-import { motion } from "framer-motion";
-import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
-
-function Homepage() {
+/* eslint-disable react/no-unescaped-entities */ import { Link } from "react-router-dom";import logo from "../assets/img/logo.png";import { motion } from "framer-motion";import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";function Homepage() {
 	return (
 		<>
 			<div className="bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 h-screen pt-14">
@@ -33,7 +29,7 @@ function Homepage() {
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.5 }}
 							className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl">
-							Gasoline <span className="text-purple-600">Station</span> Price Tracker
+							Gas <span className="text-purple-600">Fuel </span>Price Tracker
 						</motion.h1>
 						<motion.p
 							initial={{ opacity: 0, x: 20 }}
