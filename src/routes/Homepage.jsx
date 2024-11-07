@@ -29,7 +29,7 @@
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.5 }}
 							className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl">
-							Gas <span className="text-purple-600">Fuel </span>Price Tracker
+							Fuel <span className="text-purple-600">Finder </span>
 						</motion.h1>
 						<motion.p
 							initial={{ opacity: 0, x: 20 }}
