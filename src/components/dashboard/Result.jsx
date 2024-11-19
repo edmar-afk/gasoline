@@ -8,7 +8,7 @@ function Result({ results }) {
 			{/* Conditionally render the result count */}
 			{results.length > 0 && (
 				<div className="flex items-center justify-between mb-4">
-					<h2 className="text-xs font-extralight text-gray-900 dark:text-white">Number of Gasoline: {results.length}</h2>
+					<h2 className="text-sm font-extralight text-gray-900 dark:text-white">{results.length} Stations Available</h2>
 				</div>
 			)}
 			<div className="flow-root">
