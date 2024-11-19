@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */import { useState } from "react";
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+/* eslint-disable react/prop-types */import { useState } from "react";import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
@@ -58,20 +57,21 @@ const Map = ({ onSearchQueryChange }) => {
 			<div className="absolute top-0 left-1/2 transform -translate-x-[50.3%] z-50 bg-white/60 dark:bg-black/60 duration-300 w-full h-full p-2 shadow-md"></div>
 			<form
 				onSubmit={handleSearch}
-				className="absolute bottom-24 left-[10%] z-50 shadow-md mx-auto">
+				className="absolute bottom-24 left-[8%] z-50 shadow-md mx-auto flex items-center">
 				<input
 					type="text"
 					value={searchQuery}
 					onChange={(e) => setSearchQuery(e.target.value)}
 					placeholder="Enter location"
-					className="p-2 border rounded text-gray-800"
+					className="p-2 border rounded text-gray-800 h-10"
 				/>
 				<button
 					type="submit"
-					className="ml-2 p-2 bg-blue-500 text-white rounded">
-					Search
+					className="ml-2 px-4 bg-blue-500 text-white rounded text-xs h-10 flex items-center justify-center">
+					Search <br /> Municipality
 				</button>
 			</form>
+
 			<div className="absolute inset-0 z-10">
 				{statusMessage && <p className="absolute top-0 left-0 mt-8 bg-white p-2">{statusMessage}</p>}
 				<MapContainer

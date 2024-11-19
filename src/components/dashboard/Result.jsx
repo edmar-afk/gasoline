@@ -1,13 +1,16 @@
-/* eslint-disable react/prop-types */ import RemoveRedEyeSharpIcon from "@mui/icons-material/RemoveRedEyeSharp";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+/* eslint-disable react/prop-types */ import RemoveRedEyeSharpIcon from "@mui/icons-material/RemoveRedEyeSharp";import { motion } from "framer-motion";import { Link } from "react-router-dom";
 
 function Result({ results }) {
 	console.log(results);
 
 	return (
 		<div className="w-full max-w-md p-1 mb-24">
-			<div className="flex items-center justify-between mb-4"></div>
+			{/* Conditionally render the result count */}
+			{results.length > 0 && (
+				<div className="flex items-center justify-between mb-4">
+					<h2 className="text-xs font-extralight text-gray-900 dark:text-white">Number of Gasoline: {results.length}</h2>
+				</div>
+			)}
 			<div className="flow-root">
 				<ul
 					role="list"
@@ -45,7 +48,9 @@ function Result({ results }) {
 											<p className="text-sm text-gray-500 dark:text-gray-400">No gasoline entries</p>
 										)}
 									</div>
-									<Link to={`/station/${result.id}`} className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+									<Link
+										to={`/station/${result.id}`}
+										className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
 										<RemoveRedEyeSharpIcon />
 									</Link>
 								</div>

@@ -1,8 +1,4 @@
-import * as React from "react";
-import PropTypes from "prop-types";
-import { Global } from "@emotion/react";
-import { styled } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
+import * as React from "react";import PropTypes from "prop-types";import { Global } from "@emotion/react";import { styled } from "@mui/material/styles";import CssBaseline from "@mui/material/CssBaseline";
 import { grey } from "@mui/material/colors";
 import Typography from "@mui/material/Typography";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
@@ -16,7 +12,7 @@ const Root = styled("div")(({ theme }) => ({
 }));
 
 const StyledBox = styled("div")(({ theme }) => ({
-	backgroundColor: theme.palette.mode === "light" ? "#fff" : grey[800],
+	backgroundColor: theme.palette.mode === "light" ? "#1e3a8a" : "#1e40af", // Example: Dark blue shades for light and dark mode
 }));
 
 const Puller = styled("div")(({ theme }) => ({
@@ -30,7 +26,7 @@ const Puller = styled("div")(({ theme }) => ({
 }));
 
 function NarBar(props) {
-	const { window, area, results } = props;
+	const { window, results } = props;
 	const [open, setOpen] = React.useState(false);
 
 	const toggleDrawer = (newOpen) => () => {
@@ -67,8 +63,11 @@ function NarBar(props) {
 			<Global
 				styles={{
 					".MuiDrawer-root > .MuiPaper-root": {
-						height: `calc(70% - ${drawerBleeding}px)`,
+						height: `calc(78% - ${drawerBleeding}px)`,
 						overflow: "visible",
+						backgroundColor: "#e0f7fa", // Drawer background color
+						borderTopLeftRadius: 8,
+						borderTopRightRadius: 8,
 					},
 				}}
 			/>
@@ -93,15 +92,13 @@ function NarBar(props) {
 					}}>
 					<Puller />
 					<Typography
-						sx={{ p: 2, color: "text.secondary" }}
+						sx={{ p: 3, color: "text.secondary" }}
 						className="text-center">
-						<p className="text-gray-800 text-sm mt-3">
-							Statistics of Cheapest Gasoline Types around {area || "your area"}
-						</p>
+						<p className="text-white text-sm">View Cheapest Price</p>
 					</Typography>
 				</StyledBox>
 				<StyledBox sx={{ height: "100%", overflow: "auto" }}>
-					<div className="bg-white text-gray-800 dark:text-white dark:bg-gray-800 duration-300 p-3 ">
+					<div className="text-gray-800  duration-300 p-3 bg-[#1e3a8a] pt-12">
 						{open && (
 							<motion.div
 								initial={{ scale: 0 }}
