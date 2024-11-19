@@ -172,11 +172,7 @@ function Price() {
 													value="Regular">
 													Regular
 												</option>
-												<option
-													style={{ backgroundColor: "#FFFFFF", color: "#000000" }}
-													value="Washington">
-													Washington
-												</option>
+											
 											</select>
 
 											<svg
