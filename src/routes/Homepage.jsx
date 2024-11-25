@@ -1,4 +1,8 @@
-/* eslint-disable react/no-unescaped-entities */ import { Link } from "react-router-dom";import logo from "../assets/img/logo.png";import { motion } from "framer-motion";import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";function Homepage() {
+/* eslint-disable react/no-unescaped-entities */ import { Link } from "react-router-dom";
+import logo from "../assets/img/logo.png";
+import { motion } from "framer-motion";
+import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
+function Homepage() {
 	return (
 		<>
 			<div className="bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 h-screen pt-14">
@@ -18,7 +22,7 @@
 							damping: 30,
 						}}
 						src={logo}
-						className="w-40"
+						className="w-40 rounded-full shadow-2xl"
 						alt=""
 					/>
 				</div>
