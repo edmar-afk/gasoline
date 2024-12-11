@@ -1,7 +1,4 @@
-import * as React from "react";import PropTypes from "prop-types";import { Global } from "@emotion/react";import { styled } from "@mui/material/styles";import CssBaseline from "@mui/material/CssBaseline";
-import { grey } from "@mui/material/colors";
-import Typography from "@mui/material/Typography";
-import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import * as React from "react";import PropTypes from "prop-types";import { Global } from "@emotion/react";import { styled } from "@mui/material/styles";import CssBaseline from "@mui/material/CssBaseline";import { grey } from "@mui/material/colors";import Typography from "@mui/material/Typography";import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import { motion } from "framer-motion";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 const drawerBleeding = 56;
@@ -28,28 +25,35 @@ const Puller = styled("div")(({ theme }) => ({
 function NarBar(props) {
 	const { window, results } = props;
 	const [open, setOpen] = React.useState(false);
-
+	console.log('results from cheapest',results)
 	const toggleDrawer = (newOpen) => () => {
 		setOpen(newOpen);
 	};
 
-	// Function to find the cheapest gasoline prices
-	const findCheapestGasoline = (stations) => {
-		const cheapestPrices = {};
+const findCheapestGasoline = (stations) => {
+	const cheapestPrices = {};
 
-		stations.forEach((station) => {
-			station.gasoline_entries.forEach((entry) => {
-				if (!cheapestPrices[entry.type] || entry.price < cheapestPrices[entry.type].price) {
-					cheapestPrices[entry.type] = {
-						station: station,
-						price: entry.price,
-					};
-				}
-			});
+	stations.forEach((station) => {
+		console.log("Checking station:", station);
+		station.gasoline_entries.forEach((entry) => {
+			const price = parseFloat(entry.price); // Ensure price is a number
+			console.log("Checking gasoline entry:", entry);
+
+			// Update if the type is not in cheapestPrices or if the current price is cheaper
+			if (!cheapestPrices[entry.type] || price < cheapestPrices[entry.type].price) {
+				cheapestPrices[entry.type] = {
+					station: station,
+					price: price,
+				};
+				console.log(`Updated cheapest for ${entry.type}:`, cheapestPrices[entry.type]);
+			}
 		});
+	});
 
-		return cheapestPrices;
-	};
+	return cheapestPrices;
+};
+
+
 
 	// Get the cheapest gasoline prices for each type
 	const cheapestGasPrices = findCheapestGasoline(results);
@@ -109,7 +113,7 @@ function NarBar(props) {
 										const { station, price } = cheapestGasPrices[type];
 										return (
 											<div
-												key={index} // Using index as the key
+												key={type}
 												className="my-3 rounded-lg shadow-md">
 												<label className="cursor-pointer">
 													<input
@@ -121,7 +125,7 @@ function NarBar(props) {
 														<div className="flex flex-col gap-1">
 															<div className="flex items-center justify-between">
 																<p className="text-sm font-semibold uppercase text-gray-500 dark:text-gray-400">
-																	{station.first_name}
+																	{station?.first_name || "Unknown Station"}
 																</p>
 																<div>
 																	<LocalGasStationIcon />
@@ -131,7 +135,7 @@ function NarBar(props) {
 																<p>
 																	cheapest <span className="text-lg font-bold">{type}</span> gasoline:
 																</p>
-																<p className="text-sm font-bold">₱{price}/litre</p>
+																<p className="text-sm font-bold">₱{price || "N/A"}/litre</p>
 															</div>
 														</div>
 													</div>

@@ -1,4 +1,6 @@
-import Map from "../components/Map";import DarkModeToggle from "../components/DarkModeToggle";import Result from "../components/dashboard/Result";
+import Map from "../components/Map";
+import DarkModeToggle from "../components/DarkModeToggle";
+import Result from "../components/dashboard/Result";
 import { useState, useEffect } from "react";
 import api from "../assets/api";
 import Navbar from "../components/NavBar";
