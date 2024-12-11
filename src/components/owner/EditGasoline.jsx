@@ -1,11 +1,17 @@
-/* eslint-disable react/prop-types */ import { useState, useEffect } from "react";
-import Modal from "@mui/material/Modal";
+/* eslint-disable react/prop-types */ import { useState, useEffect } from "react";import Modal from "@mui/material/Modal";
 import api from "../../assets/api";
 
 function EditGasoline({ id, open, handleClose, refetchGasolines }) {
 	const [gasolineName, setGasolineName] = useState("");
 	const [price, setPrice] = useState("");
 	const [loading, setLoading] = useState(false);
+	const [priceError, setPriceError] = useState(false); // State to handle price error
+
+	const handlePriceChange = (e) => {
+		const value = e.target.value;
+		setPrice(value);
+		setPriceError(value > 80); // Set error if price exceeds 80
+	};
 
 	useEffect(() => {
 		if (id) {
@@ -119,8 +125,10 @@ function EditGasoline({ id, open, handleClose, refetchGasolines }) {
 							id="price"
 							placeholder="Price(₱)"
 							value={price}
-							onChange={(e) => setPrice(e.target.value)}
-							className="peer mt-1 w-full border-b-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-0 py-1 placeholder:text-transparent focus:border-gray-500 dark:focus:border-gray-400 focus:outline-none"
+							onChange={handlePriceChange}
+							className={`peer mt-1 w-full border-b-2 ${
+								priceError ? "border-red-500" : "border-gray-300 dark:border-gray-700"
+							} bg-white dark:bg-gray-900 px-0 py-1 placeholder:text-transparent focus:outline-none`}
 							required
 						/>
 						<label
@@ -128,13 +136,17 @@ function EditGasoline({ id, open, handleClose, refetchGasolines }) {
 							className="pointer-events-none absolute top-0 left-0 origin-left -translate-y-1/2 transform text-sm opacity-75 text-gray-800 dark:text-gray-300 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 dark:peer-placeholder-shown:text-gray-400 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800 dark:peer-focus:text-gray-300">
 							Price(₱)
 						</label>
+						{priceError && <p className="mt-2 text-xs text-red-500">Price must not exceed ₱80.</p>}
 					</div>
-
 					<div className="my-6">
 						<button
 							type="submit"
-							className="w-full rounded-md bg-orange-400 dark:bg-blue-600 px-3 py-2 text-white focus:bg-gray-600 dark:focus:bg-gray-700 focus:outline-none"
-							disabled={loading}>
+							className={`w-full rounded-md px-3 py-2 text-white ${
+								priceError
+									? "bg-red-500 cursor-not-allowed"
+									: "bg-orange-400 dark:bg-blue-600 focus:bg-gray-600 dark:focus:bg-gray-700"
+							} focus:outline-none`}
+							disabled={loading || priceError}>
 							{loading ? "Saving..." : "Save"}
 						</button>
 					</div>
