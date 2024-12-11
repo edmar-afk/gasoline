@@ -1,4 +1,5 @@
-/* eslint-disable react/prop-types */import { useState, useEffect } from "react";import Modal from "@mui/material/Modal";
+/* eslint-disable react/prop-types */ import { useState, useEffect } from "react";
+import Modal from "@mui/material/Modal";
 import api from "../../assets/api";
 
 function EditGasoline({ id, open, handleClose, refetchGasolines }) {
@@ -79,11 +80,6 @@ function EditGasoline({ id, open, handleClose, refetchGasolines }) {
 									style={{ backgroundColor: "#FFFFFF", color: "#000000" }}
 									value="Regular">
 									Regular
-								</option>
-								<option
-									style={{ backgroundColor: "#FFFFFF", color: "#000000" }}
-									value="Washington">
-									Washington
 								</option>
 							</select>
 
